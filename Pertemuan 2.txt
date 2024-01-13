@@ -1,0 +1,93 @@
+// import library stdio.h
+#include<stdio.h>
+
+//Mendeklarasikan array a dengan ukuran 100, 
+//serta variabel max dan min.
+int a[100];
+int max, min;
+
+//membuat prototype maxmin yang menerima 2 parameter 
+//integer & Integer
+void maxmin(int,int);
+
+//function main 
+int main() {
+	
+	//mendeklarasikan variable i & num yang bertipe 
+	//integer
+    int i, num;
+    printf("\nAkmal Muhammad_50468135\n");
+    
+    //Mencetak pesan untuk awal output
+    printf("\n\t\t\tMaximum Dan Minimum\n\n");
+    
+    // Meminta user memasukan banyak angka 
+    printf("Masukkan Banyak Angka: ");
+    //membaca nilai yang dimasukkan pengguna 
+	//dan menyimpan dalam variable num
+    scanf("%d", &num);
+    
+    // Meminta user memasukan angka-angkanya 
+    printf("\nMasukkan Angka-angkanya: \n");
+    //looping indeks i (i sama dengan 0, 
+	//i kurang dari num, maka i bertambah
+	for (i = 0; i < num; i++) {
+        scanf("%d", &a[i]);
+    }
+    
+    //Mencetak output angka-angka yang sudah di input 
+	//oleh user 
+    printf("\nAngka-angkanya adalah: \n");
+    for (i = 0; i < num; i++) {
+        printf("%d ", a[i]);
+    }
+    
+    //Menginisiasi Variabel Maksimum dan Minimum 
+	//dengan nilai indeks ke 0 dari array a
+    max = a[0];
+    min = a[0];
+    
+    //Memanggil fungsi maxmin dengan 
+	//parameter 0 dan num - 1
+    maxmin(0, num - 1);
+    
+    //mencetak hasil maksimum dan minimum
+    printf("\n\nMaksimum Angka: %d\n", max);
+    printf("Minimum Angka: %d\n", min);
+    return 0;
+}
+
+// untuk menerima 2 parameter yaitu ( i, j) 
+//yang bertipe integer
+void maxmin(int i, int j){
+	
+	//deklarasi variable max1, min1, mid
+    int max1, min1, mid;
+    
+    //digunakan untuk logika if else dari maxmin 
+    if (i == j){
+        max = min = a[i];
+    } else if (i == j - 1){
+        if (a[i] > a[j]){
+            max = a[i];
+            min = a[j];
+        } else {
+            max = a[j];
+            min = a[i];
+        }
+    } else {
+    	//Untuk implementasi devide & conquer
+        mid = (i + j) / 2;
+        maxmin(i, mid);
+        max1 = max;
+        min1 = min;
+        maxmin(mid + 1, j);
+        
+        //berfungsi untuk membandingkan 
+		//antara max & max1, min & min1
+        if (max < max1)
+            max = max1;
+        if (min > min1)
+            min = min1;
+    }
+}

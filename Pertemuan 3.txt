@@ -1,0 +1,62 @@
+//import library iostream & string
+#include <iostream>
+#include <string>
+ 
+// membuat funtion macth untuk check apakah substring ada dalam text,
+//kemudian kita buat variable konstanta bertipe data string dengan nama text & pattern
+int match(const std::string& text, const std::string& pattern) {
+    //untuk menentuka posisi awalnya 
+	int posisi = -1;
+	//membuat variable panjang text dan pattern menggunakan function lenght
+    int text_length = text.length();
+    int pattern_length = pattern.length();
+ 
+ 	//untuk check apakah pattern lebih panjang dari text 
+    if (pattern_length > text_length) {
+        return -1;
+    }
+ 
+ 	//berfungsi untuk looping sebanyak text lenght di kurang pattern lenght
+    for (int i = 0; i <= text_length - pattern_length; i++) {
+        posisi = i;
+        //looping yang di gunakan untuk melakukan pengechek pattern
+        //jika gagal maka akan kembali ke for loop diatas
+		int j;
+        for (j = 0; j < pattern_length; j++) {
+            if (pattern[j] != text[i + j]) {
+                break;
+            }
+        }
+        //jika j  sudah sama dengan pattern lenght maka akan return posisi
+        if (j == pattern_length) {
+            return posisi;
+        }
+    }
+    return -1;
+}
+ //function main 
+int main() {
+	
+    std::string a, b;
+    int posisi;
+ 	std::cout << "\nAkmal Muhammad_50420102\n";
+    std::cout << "\n\t\tProgram Untuk Menentukan Substring Dari Sebuah String\n";
+    //kita meminta user untuk memasukkan string 
+    std::cout << "\nMasukkan String :\n\t";
+    std::getline(std::cin, a);
+    //kita meminta user untuk memasukkan substring 
+    std::cout << "\nMasukkan Substring :\n\t";
+    std::getline(std::cin, b);
+    
+    //membuat variable posisi yang menerima value dari function match
+    posisi = match(a, b);
+    
+    //berfungsi untuk melakukan pengecheckan terhadap variable posisi
+    if (posisi != -1) {
+        std::cout << "\n\n\t\t\tSubstring ADA di dalam string.\n\n";
+    } else {
+        std::cout << "\n\n\t\t\tSubstring TIDAK ada di dalam string.\n\n";
+    }
+ 
+    return 0;
+}
